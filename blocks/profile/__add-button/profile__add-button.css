@@ -4,6 +4,8 @@
     width: 150px;
     object-fit: none;
     height: 50px;
+    box-sizing: border-box;
+    border-radius: 2px;
 }
 @media screen and (max-width:700px) {
     .profile__add-button {
