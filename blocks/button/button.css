@@ -2,8 +2,6 @@
     background-color: black;
     border: none;
     margin-left: auto;
-    height: 50px;
-    padding-top:26px;
 }
 button:hover {
     opacity: 0.6;
