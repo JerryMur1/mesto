@@ -1,18 +1,4 @@
-.button {
-    background-color: black;
-    border: none;
-    margin-left: auto;
-}
-button:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
 
-@media screen and (max-width:700px) {
-    .button {
-        margin: 0 auto;
-        padding-top: 0;
-        border: 2px solid #ffffff;
-        width: 90%;
-    }
+.button:focus {
+    outline: none;
 }

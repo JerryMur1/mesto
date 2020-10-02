@@ -1,5 +1,6 @@
 .popup__name {
-
+border: none;
+border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 font-style: normal;
 font-weight: normal;
 font-size: 14px;
@@ -8,5 +9,5 @@ margin: 0;
 color: #000000;
 margin-bottom: 29px;
 outline: 0;
-border: none;
+padding-bottom: 13px;
 }

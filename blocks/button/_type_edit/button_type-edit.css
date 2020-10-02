@@ -1,0 +1,22 @@
+.button_type_edit {
+    margin-top: 37px;
+    margin-left: 17px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ffffff;
+    background-color: black;
+}
+.button_type_edit:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width:500px){
+    .button_type_edit{
+        margin-top: 37px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-left: 6px;
+        
+    }  
+}
