@@ -1,0 +1,11 @@
+.button_type_like {
+    padding-right: 22px;
+    margin: 0;
+    margin-top: 9px;
+    border: none;
+    
+}
+.button_type_like:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
