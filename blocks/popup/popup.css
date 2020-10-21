@@ -8,5 +8,10 @@
     bottom: 0;
     justify-content: center;
     align-items: center;
-    display: none;
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    
 }
+

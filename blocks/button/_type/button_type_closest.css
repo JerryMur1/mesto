@@ -1,0 +1,20 @@
+
+    .button_type_closest{
+        position: absolute;
+        top:-48px;
+        right: -55px;
+        background:none;
+        border: none;
+        
+    }
+    .button_type_closest:hover {
+        opacity: 0.6;
+        cursor: pointer;
+    }
+    
+    @media screen and (max-width:530px){
+        .button_type_closest {
+            right: -10px;
+            top: -30px;
+        }
+    }

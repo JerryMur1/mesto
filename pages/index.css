@@ -30,3 +30,11 @@
 @import url(../blocks/button/_type/button_type_save.css);
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_like.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
+@import url(../blocks/button/_type/button_type_delete.css);
+@import url(../blocks/button/_type/button_type_image.css);
+@import url(../blocks/window/__content/window__content.css);
+@import url(../blocks/window/window.css);
+@import url(../blocks/button/_type/button_type_closest.css);
+@import url(../blocks/window/__subtitle/window__subtitle.css);
+@import url(../blocks/window/__image/window__image.css);
