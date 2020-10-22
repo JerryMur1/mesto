@@ -25,54 +25,55 @@ let initialCards = [
     }
 ];
 
-let editButton = document.querySelector(".button_type_edit");
-let addButton = document.querySelector(".button_type_add");
-let closeButton = document.querySelectorAll(".button_type_close");
-let closestButton = document.querySelector(".button_type_closest");
-let windowModall = document.querySelector(".window_modal");
-let imageButton = document.querySelector(".button_type_image");
-let popUpAdd = document.querySelector(".popup_add");
-let popUpEdit = document.querySelector(".popup_edit");
-let nameInput = document.querySelector(".popup__name_type_title");
-let jobInput = document.querySelector(".popup__name_type_subtitle");
-let newPlace = document.querySelector(".popup__place_type_title");
-let newImage = document.querySelector(".popup__place_type_subtitle");
-let titleName = document.querySelector(".profile__title");
-let titleJob = document.querySelector(".profile__subtitle");
-let list = document.querySelector(".elements");
-let template = document.querySelector(".template");
+const editButton = document.querySelector(".button_type_edit");
+const addButton = document.querySelector(".button_type_add");
+const windowModall = document.querySelector(".window_modal");
+const closeWindowModallButton = windowModall.querySelector(".button_type_close");
+const imageButton = document.querySelector(".button_type_image");
+const popUpAdd = document.querySelector(".popup_add");
+const closePopUpAddButton = popUpAdd.querySelector(".button_type_close");
+const popUpEdit = document.querySelector(".popup_edit");
+const closePopUpEditButton = popUpEdit.querySelector(".button_type_close");
+const nameInput = document.querySelector(".popup__name_type_title");
+const jobInput = document.querySelector(".popup__name_type_subtitle");
+const newPlace = document.querySelector(".popup__place_type_title");
+const newImage = document.querySelector(".popup__place_type_subtitle");
+const titleName = document.querySelector(".profile__title");
+const titleJob = document.querySelector(".profile__subtitle");
+const list = document.querySelector(".elements");
+const template = document.querySelector(".template");
 
 
 
-let popUpToggle = (popUp) => {
+const openPopUp = (popUp) => {
     popUp.classList.toggle("popup_is-opened");
 };
-let popUpCopy = (popUp) => {
+const getPopUp = (popUp) => {
     nameInput.value = titleName.textContent;
     jobInput.value = titleJob.textContent;
-    popUpToggle(popUp);
+    openPopUp(popUp);
 };
 
-editButton.addEventListener("click", () => popUpCopy(popUpEdit));
-addButton.addEventListener("click", () => popUpToggle(popUpAdd));
-closeButton[0].addEventListener("click", () => popUpToggle(popUpEdit));
-closeButton[1].addEventListener("click", () => popUpToggle(popUpAdd));
-closestButton.addEventListener("click", () => popUpToggle(windowModall));
+editButton.addEventListener("click", () => getPopUp(popUpEdit));
+addButton.addEventListener("click", () => openPopUp(popUpAdd));
+closePopUpEditButton.addEventListener("click", () => openPopUp(popUpEdit));
+closePopUpAddButton.addEventListener("click", () => openPopUp(popUpAdd));
+closeWindowModallButton.addEventListener("click", () => openPopUp(windowModall));
 
 
-let formElement = document.querySelector(".popup__container");
-let formElementAdd = document.querySelector(".popup__container_add");
+const formElement = document.querySelector(".popup__container");
+const formElementAdd = document.querySelector(".popup__container_add");
 
-function formSubmitHandler (evt) {
+function submitForm (evt) {
     evt.preventDefault(); 
     
     titleName.textContent = nameInput.value;
     titleJob.textContent = jobInput.value;
 
-    popUpToggle(popUpEdit);
+    openPopUp(popUpEdit);
 };
 
-function formSubmitHandlerAdd (evt) {
+function submitFormAdd (evt) {
     evt.preventDefault();
     const newItem = {
         name: newPlace.value,
@@ -81,13 +82,13 @@ function formSubmitHandlerAdd (evt) {
 
     list.prepend(getItems(newItem));
     
-    popUpToggle(popUpAdd);
+    openPopUp(popUpAdd);
 }
 
-formElementAdd.addEventListener('submit', formSubmitHandlerAdd);
+formElementAdd.addEventListener('submit', submitFormAdd);
 
 
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', submitForm);
 
 const renderList = () => {
     const items = initialCards.map(element => getItems(element));
@@ -99,31 +100,33 @@ const getItems = (data) => {
     const deleteButton = card.querySelector(".button_type_delete");
     const likeButton = card.querySelector(".element__like");
     const imageButton = card.querySelector(".button_type_image");
-    const windowImage = document.querySelector(".window__image");
-    const windowSubtitle = document.querySelector(".window__subtitle");
-    const windowModal = document.querySelector(".window");
-    imageButton.addEventListener("click", () => {
-        windowImage.src = data.link;
-        windowSubtitle.textContent = data.name;
-        popUpToggle(windowModal);
-    });
-
-likeButton.addEventListener("click", function(evt) {
-    evt.target.classList.toggle("element__like_active");
-});
-    
-    deleteButton.addEventListener('click', function () {
-        const listItem = deleteButton.closest(".element");
-        listItem.remove();
-    })
-
+    imageButton.addEventListener("click", () => handlePreviewPicture(data));
+    likeButton.addEventListener("click", handleLikeIcon);
+    deleteButton.addEventListener('click', () => handleDeleteCard(deleteButton));
     
     
-    card.querySelector(".element__title").innerText = data.name;
+    card.querySelector(".element__title").textContent = data.name;
     card.querySelector(".element__image").src = data.link;
+    card.querySelector(".element__image").alt = data.link;
 
     return card;
 };
+
+const handleDeleteCard = (deleteButton) => {
+    const listItem = deleteButton.closest(".element");
+    listItem.remove();
+};
+    const handleLikeIcon = (evt) => {
+        evt.target.classList.toggle("element__like_active");
+    };
+    const handlePreviewPicture = (data) => {
+        const windowSubtitle = document.querySelector(".window__subtitle");
+        const windowImage = document.querySelector(".window__image");
+        const windowModal = document.querySelector(".window")
+        windowImage.src = data.link;
+        windowSubtitle.textContent = data.name;
+        openPopUp(windowModal);
+    };
 
 renderList();
 

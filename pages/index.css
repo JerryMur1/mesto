@@ -35,6 +35,6 @@
 @import url(../blocks/button/_type/button_type_image.css);
 @import url(../blocks/window/__content/window__content.css);
 @import url(../blocks/window/window.css);
-@import url(../blocks/button/_type/button_type_closest.css);
 @import url(../blocks/window/__subtitle/window__subtitle.css);
 @import url(../blocks/window/__image/window__image.css);
+@import url(../blocks/window/__close-icon/window__close-icon.css);
