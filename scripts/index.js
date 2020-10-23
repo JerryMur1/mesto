@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -100,14 +100,17 @@ const getItems = (data) => {
     const deleteButton = card.querySelector(".button_type_delete");
     const likeButton = card.querySelector(".element__like");
     const imageButton = card.querySelector(".button_type_image");
+    const elementImage = card.querySelector(".element__image");
     imageButton.addEventListener("click", () => handlePreviewPicture(data));
     likeButton.addEventListener("click", handleLikeIcon);
     deleteButton.addEventListener('click', () => handleDeleteCard(deleteButton));
     
     
     card.querySelector(".element__title").textContent = data.name;
-    card.querySelector(".element__image").src = data.link;
-    card.querySelector(".element__image").alt = data.link;
+    elementImage.src = data.link;
+    elementImage.alt = data.link;
+    
+    
 
     return card;
 };
