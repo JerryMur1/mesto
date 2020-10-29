@@ -43,7 +43,14 @@ const titleJob = document.querySelector(".profile__subtitle");
 const list = document.querySelector(".elements");
 const template = document.querySelector(".template");
 
-
+const closeByPopUp = (evt) => {
+    if (evt.target.classList[1] == "popup_edit")
+        openPopUp(popUpEdit)
+    else if (evt.target.classList[1] == "popup_add")
+        openPopUp(popUpAdd)
+    else if (evt.target.classList[1] == "window_modal")
+        openPopUp(windowModall)
+}
 
 const openPopUp = (popUp) => {
     popUp.classList.toggle("popup_is-opened");
