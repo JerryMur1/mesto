@@ -1,16 +1,4 @@
 
-popUpAdd.addEventListener("click", closeByPopUp);
-popUpEdit.addEventListener("click", closeByPopUp);
-windowModall.addEventListener("click", closeByPopUp);
-const keyHandle = (evt) => {
-    if (evt.key === 'Escape') {
-        windowModall.classList.remove('popup_is-opened');
-        popUpEdit.classList.remove('popup_is-opened');
-        popUpAdd.classList.remove('popup_is-opened');
-    }
-};
-document.addEventListener("keydown", keyHandle);
-
 function showError(formElement, input) {
 const errorElement = formElement.querySelector(`#${input.id}-error`);
 errorElement.textContent = input.validationMessage;
@@ -56,8 +44,8 @@ function setEventListeners(formElement) {
         });
         toggleButtonElement(formElement, buttonElement);
     };
-function enableValidation() {
-    const formElements = Array.from(document.querySelectorAll(".popup__content"));
+function enableValidation({formSelector}) {
+    const formElements = Array.from(document.querySelectorAll(formSelector));
     formElements.forEach(form => {
         form.addEventListener('submit', (evt)=> {
             evt.preventDefault();
@@ -67,4 +55,8 @@ function enableValidation() {
 }
 
 
-enableValidation();
+
+enableValidation({
+    formSelector: '.popup__content'
+    
+});

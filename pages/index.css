@@ -33,11 +33,9 @@
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/button/_type/button_type_delete.css);
 @import url(../blocks/button/_type/button_type_image.css);
-@import url(../blocks/window/__content/window__content.css);
-@import url(../blocks/window/window.css);
-@import url(../blocks/window/__subtitle/window__subtitle.css);
-@import url(../blocks/window/__image/window__image.css);
-@import url(../blocks/window/__close-icon/window__close-icon.css);
+@import url(../blocks/popup/__group/popup__group.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__subtitle/popup__subtitle.css);
 @import url(../blocks/popup/__content/_state/popup__content_state_invalid.css);
 @import url(../blocks/error/error.css);
 @import url(../blocks/button/_type/button_type_invalid.css);
