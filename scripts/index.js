@@ -49,11 +49,10 @@ const formElementAdd = document.querySelector(".popup__container_add");
 
 
 function keyHandle(evt) {
-    const arrayPopups = Array.from(document.querySelectorAll(".popup"));
-    const popupActive = arrayPopups.find((popup) => popup.classList.contains("popup_is-opened"));
+    const activePopup = document.querySelector('.popup_is-opened');
 
     if (evt.key === 'Escape') {
-        popupActive.classList.remove("popup_is-opened");
+        closePopUp(activePopup);
     }
 };
 
@@ -63,15 +62,13 @@ function keyHandle(evt) {
 
 
 const openPopUp = (popUp) => {
-    if (popUp.classList.contains('popup_edit')) {
-        nameInput.value = titleName.textContent;
-        jobInput.value = titleJob.textContent;
-    }
     popUp.classList.add("popup_is-opened");
+    document.addEventListener("keydown", keyHandle)
 };
 
 const closePopUp = (popUp) => {
     popUp.classList.remove("popup_is-opened");
+    document.removeEventListener("keydown", keyHandle)
 };
 
 
@@ -139,7 +136,11 @@ const handleDeleteCard = (deleteButton) => {
 
     formElementAdd.addEventListener('submit', submitFormAdd);
     formElement.addEventListener('submit', submitForm);
-    editButton.addEventListener("click", () => openPopUp(popUpEdit));
+    editButton.addEventListener("click", () => {
+        nameInput.value = titleName.textContent;
+        jobInput.value = titleJob.textContent;
+        openPopUp(popUpEdit)
+    });
     addButton.addEventListener("click", () => openPopUp(popUpAdd));
     popUpAdd.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-icon')) {
@@ -157,7 +158,7 @@ const handleDeleteCard = (deleteButton) => {
         }
     });
 
-    document.addEventListener("keydown", keyHandle);
+    
     
 
 renderList();
