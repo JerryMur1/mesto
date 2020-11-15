@@ -1,65 +1,64 @@
-
-function showError(formElement, input, {inputErrorClass, errorClass}) {
-
-const errorElement = formElement.querySelector(`#${input.id}-${errorClass}`);
-errorElement.textContent = input.validationMessage;
-input.classList.add(inputErrorClass);
-}
-function hideError(formElement, input, {inputErrorClass, errorClass}) {
-    const errorElement = formElement.querySelector(`#${input.id}-${errorClass}`);
-errorElement.textContent = '';
-input.classList.remove(inputErrorClass);
-};
-
-function checkInputValidity(formElement, input, {inputErrorClass, errorClass}) {
-    if (input.checkValidity()) {
-        hideError(formElement, input, {inputErrorClass, errorClass});
+export class FormValidation {
+    constructor(settings, formElement) {
+        
+    this._formElement = formElement;
+    this._settings = settings;
     }
-    else {
-        showError(formElement, input, {inputErrorClass, errorClass});
-    }
-};
 
+    _checkInputValidity (input){
+        if (input.checkValidity()) {
+            this._hideError(input);
+        }
+        else {
+            this._showError(input);
+        }
 
-
-function toggleButtonElement(formElement, buttonElement, {inactiveButtonClass}) {
-    if (formElement.checkValidity()) {
-        buttonElement.classList.remove(inactiveButtonClass);
-        buttonElement.disabled = false;
-    }
-    else {
-        buttonElement.classList.add(inactiveButtonClass);
-        buttonElement.disabled = true;
-    }
-}
-
-
-function setEventListeners(formElement, {inputSelector, submitButtonSelector, ...rest}) {
-    const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
-    const buttonElement = formElement.querySelector(submitButtonSelector);
-    inputElements.forEach((input) => {
-    input.addEventListener('input', (evt) => {
-    checkInputValidity(formElement, evt.target, {...rest});
-    toggleButtonElement(formElement, buttonElement, {...rest});
-            });
-        });
-        toggleButtonElement(formElement, buttonElement, {...rest});
     };
-function enableValidation({formSelector, ...rest}) {
-    const formElements = Array.from(document.querySelectorAll(formSelector));
-    formElements.forEach(form => {
-        form.addEventListener('submit', (evt)=> {
+
+_showError(input){
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
+    errorElement.textContent = input.validationMessage;
+    input.classList.add(this._settings.inputErrorClass);
+}
+_hideError(input) {
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
+errorElement.textContent = '';
+input.classList.remove(this._settings.inputErrorClass);
+};
+
+
+
+    _toggleButtonElement() {
+        const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+        if (this._formElement.checkValidity()) {
+            buttonElement.classList.remove(this._settings.inactiveButtonClass);
+            buttonElement.disabled = false;
+        }
+        else {
+            buttonElement.classList.add(this._settings.inactiveButtonClass);
+            buttonElement.disabled = true;
+        }
+    }
+
+    _setEventListeners() {
+        const inputElements = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+        const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+        inputElements.forEach((input) => {
+        input.addEventListener('input', () =>{
+        this._checkInputValidity(input);
+        this._toggleButtonElement(buttonElement);
+                });
+            });
+            this._toggleButtonElement(this._formElement, buttonElement);
+    };
+
+    enableValidation() {
+        this._formElement.addEventListener('submit', (evt)=> {
             evt.preventDefault();
             });
-        setEventListeners(form, {...rest});
-    });
-}
+            this._setEventListeners();
+    };
+    
+};
 
-enableValidation({
-    formSelector: '.popup__content',
-    inputSelector: '.popup__name',
-    submitButtonSelector: '.button_type_save',
-    inactiveButtonClass: 'button_type_invalid',
-    inputErrorClass: 'popup__content_state_invalid',
-    errorClass: 'error'
-});
+
