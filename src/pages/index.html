@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Жак-Ив Кусто</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    
+    <div class="page">
+        <header class="header">
+            <img class="header__logo" alt="Место" src="<%=require('../images/Vector.svg')%>">
+            
+        </header>
+        <section class="profile">
+            <img class="profile__avatar" alt="Кусто" src="<%=require('../images/kusto.png')%>">
+            <div class="profile__info">
+                <div class="profile__text">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <p class="profile__subtitle">Исследователь океана</p>
+                </div>
+            <button class="button button_type_edit" type="button"><img class="profile__edit-button" src="<%=require('../images/Edit-Button.svg')%>" alt="редактировать"></button>
+            </div>
+            <button class="button button_type_add" type="button"><img class="profile__add-button" src="<%=require('../images/Vector3.svg')%>" alt="плюс"></button>
+        </section>
+        <section class="popup popup_edit">
+            <div class="popup__container">
+            <form class="popup__content" name="content">
+                <button class="button button_type_close" type="button"><img src="<%=require('../images/Close-icon.svg')%>" alt="Крестик закрытия" class="popup__close-icon"></button>
+                <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
+                <input required type="text" name="firstname" minlength="2" maxlength="40" id="name-profile" class="popup__name popup__name_type_title" value="">
+                <span id="name-profile-error" class="error"></span>
+                <input required type="text" name="secondname" minlength="2" maxlength="200" id="secondname-profile" class="popup__name popup__name_type_subtitle" value="">
+                <span id="secondname-profile-error" class="error"></span>
+                <button class="button button_type_save" type="submit">Сохранить</button>
+            </form>
+            </div>
+        </section>
+        <section class="popup popup_add">
+        <div class="popup__container popup__container_add">
+            <form class="popup__content" name="content">
+                <button class="button button_type_close" type="button"><img src="<%=require('../images/Close-icon.svg')%>" alt="Крестик закрытия" class="popup__close-icon"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <input required type="text" minlength="2" maxlength="30" name="firstname" id="name-card" class="popup__name popup__place_type_title" value="" placeholder="Название">
+                <span id="name-card-error" class="error" color="red"></span>
+                <input required type="url" name="secondname" id="link" class="popup__name popup__place_type_subtitle" value="" placeholder="Ссылка на картинку">
+                <span id="link-error" class="error"></span>
+                <button class="button button_type_save" type="submit">Создать</button>
+            </form>
+            </div>
+        </section>
+        <section class="popup popup_modal">
+            <div class="popup__group">
+                <button class="button button_type_close" type="button"><img src="<%=require('../images/Close-icon.svg')%>" alt="Крестик закрытия" class="popup__close-icon"></button>
+                <img class="popup__image" src="" alt="Картинка">
+                <p class="popup__subtitle"></p>
+            </div>
+        </section>
+        <section class="elements">
+        </section>
+        <footer class="footer">
+            <p class="footer__copyright">© 2020 Mesto Russia</p>
+        </footer>
+    </div>
+    <template id="template">
+        <div class="element">
+            <button class="button button_type_delete" type="button"><img class="element__delete" src="<%=require('../images/Group.svg')%>" alt="Удаление"></button>
+            <button class="button button_type_image" type="button"><img class="element__image" src="" alt="Картинка"></button>
+            <div class="element__group">
+                <h2 class="element__title"></h2>
+                <button class="button button_type_like" type="button"><img class="element__like" src="<%=require('../images/Vector2.svg')%>" alt="Лайк"></button>
+            </div>
+        </div>
+    </template>
+
+</body>
+</html>
