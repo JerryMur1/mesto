@@ -9,7 +9,7 @@ import {UserInfo} from "../components/UserInfo.js";
 import {initialCards, editButton, addButton, 
     cardsElement, nameInput, 
     jobInput, newPlace, newImage, 
-    formSelector} from '../utils/constants.js'
+    formSelector, submitButtonSelector} from '../utils/constants.js'
 
 
 
@@ -18,10 +18,10 @@ import {initialCards, editButton, addButton,
 
 
 function clickCard(name, link) {
-    const popupImage = new PopupWithImage('.popup_modal');
     popupImage.setEventListeners();
     popupImage.open(name, link)
 }
+const popupImage = new PopupWithImage('.popup_modal');
 
 const cardsList = new Section({
     items: initialCards,
@@ -59,53 +59,48 @@ formValidation.enableValidation();
 
 const handleUserInfo = new UserInfo({profileName: '.profile__title', profileJob:'.profile__subtitle'})
 
+const handleProfilePopup = new PopupWithForm('.popup_edit',  
+{submitFormFunc:  submitFormEdit}) 
+
+function submitFormEdit(){
+    handleUserInfo.setUserInfo(nameInput.value, jobInput.value) 
+    handleProfilePopup.close(); 
+}
 
 
+const handleAddPopup = new PopupWithForm('.popup_add',  { 
+submitFormFunc: submitForm
+    }) 
+ 
 
-const handleProfilePopup = new PopupWithForm('.popup_edit', 
-    {submitFormFunc: (evt) => {
-        evt.preventDefault();
-    handleUserInfo.setUserInfo(nameInput.value, jobInput.value)
-    handleProfilePopup.close();
-
-}})
-
-const handleAddPopup = new PopupWithForm('.popup_add',  {
-    submitFormFunc: (evt) => {
-    evt.preventDefault();
-    const newItem = {
-        name: newPlace.value,
-        link: newImage.value,
-        handleCardClick: () => clickCard(newPlace.value, newImage.value)
-    };
-    const card = new Card(newItem, '#template')
-    const cardElement = card.render();
-    cardsList.addItem(cardElement);
-    handleAddPopup.close()
-    
-}})
-
-
-
-const popupImage = new PopupWithImage(".popup_modal",  (evt) =>{
-    evt.open(); 
-    popupImage.setEventListeners()
-    popupImage.close()
-})
+   function submitForm() { 
+        const newItem = { 
+            name: newPlace.value, 
+            link: newImage.value, 
+            handleCardClick: () => clickCard(newPlace.value, newImage.value) 
+        }; 
+        const card = new Card(newItem, '#template') 
+        const cardElement = card.render(); 
+        cardsList.addItem(cardElement); 
+        handleAddPopup.close() 
+    }
 
 
 
 
 handleAddPopup.setEventListeners()
-    
+handleProfilePopup.setEventListeners()
+
+
     editButton.addEventListener("click", () => {
-        handleProfilePopup.setEventListeners()
-        nameInput.value = handleUserInfo.getUserInfo().name
-        jobInput.value = handleUserInfo.getUserInfo().job
+        const getUser = handleUserInfo.getUserInfo();
+        nameInput.value = getUser.name
+        jobInput.value = getUser.job
         handleProfilePopup.open()
     });
     addButton.addEventListener("click", () => {
         handleAddPopup.open()
+        submitButtonSelector[1].classList.add('button_type_invalid')
     });
 
 
