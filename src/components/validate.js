@@ -1,6 +1,5 @@
 export class FormValidation {
-    constructor(settings, formElement) {
-        
+    constructor(settings, formElement) { 
     this._formElement = formElement;
     this._settings = settings;
     }
@@ -22,8 +21,8 @@ _showError(input){
 }
 _hideError(input) {
     const errorElement = this._formElement.querySelector(`#${input.id}-error`);
-errorElement.textContent = '';
-input.classList.remove(this._settings.inputErrorClass);
+    errorElement.textContent = '';
+    input.classList.remove(this._settings.inputErrorClass);
 };
 
 
@@ -49,14 +48,14 @@ input.classList.remove(this._settings.inputErrorClass);
         this._toggleButtonElement(buttonElement);
                 });
             });
-            this._toggleButtonElement(this._formElement, buttonElement);
+        this._toggleButtonElement(this._formElement, buttonElement);
     };
 
     enableValidation() {
         this._formElement.addEventListener('submit', (evt)=> {
             evt.preventDefault();
             });
-            this._setEventListeners();
+        this._setEventListeners();
     };
     
 };

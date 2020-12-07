@@ -1,5 +1,4 @@
 export class UserInfo {
-    
     constructor({profileName, profileJob}){
         this._name = document.querySelector(profileName);
         this._job = document.querySelector(profileJob);

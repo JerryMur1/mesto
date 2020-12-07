@@ -9,37 +9,31 @@ import {UserInfo} from "../components/UserInfo.js";
 import {initialCards, editButton, addButton, 
     cardsElement, nameInput, 
     jobInput, newPlace, newImage, 
-    formSelector, submitButtonSelector} from '../utils/constants.js'
+    formSelector} from '../utils/constants.js'
 
 
-
-
-
-
-
-function clickCard(name, link) {
-    popupImage.setEventListeners();
+function clickCard({name, link}) {
     popupImage.open(name, link)
 }
 const popupImage = new PopupWithImage('.popup_modal');
-
+popupImage.setEventListeners();
 const cardsList = new Section({
     items: initialCards,
-    renderer: ({name, link}) => {
-        const card = new Card({name: name, link: link, 
-        handleCardClick:  () => clickCard(name, link)
-    }, "#template")
-    const cardElement = card.render();
-    cardsList.addItem(cardElement);
-    
-    }},      
+    renderer: ({name, link}) => createCard({name, link})
+    },      
     cardsElement
 );
 cardsList.render()
 
 
 
-
+function createCard(item) {
+    const card = new Card({name: item.name, link: item.link, 
+        handleCardClick:  () => clickCard(item)
+    }, "#template")
+    const cardElement = card.render();
+    cardsList.addItem(cardElement);
+}
 
 
 
@@ -62,26 +56,22 @@ const handleUserInfo = new UserInfo({profileName: '.profile__title', profileJob:
 const handleProfilePopup = new PopupWithForm('.popup_edit',  
 {submitFormFunc:  submitFormEdit}) 
 
-function submitFormEdit(){
-    handleUserInfo.setUserInfo(nameInput.value, jobInput.value) 
+function submitFormEdit(data){
+    handleUserInfo.setUserInfo(data.firstname, data.secondname) 
     handleProfilePopup.close(); 
 }
 
 
 const handleAddPopup = new PopupWithForm('.popup_add',  { 
-submitFormFunc: submitForm
-    }) 
- 
+submitFormFunc: submitNewCardForm
+    })
 
-   function submitForm() { 
+function submitNewCardForm() { 
         const newItem = { 
             name: newPlace.value, 
-            link: newImage.value, 
-            handleCardClick: () => clickCard(newPlace.value, newImage.value) 
+            link: newImage.value
         }; 
-        const card = new Card(newItem, '#template') 
-        const cardElement = card.render(); 
-        cardsList.addItem(cardElement); 
+        createCard(newItem);
         handleAddPopup.close() 
     }
 
@@ -100,7 +90,7 @@ handleProfilePopup.setEventListeners()
     });
     addButton.addEventListener("click", () => {
         handleAddPopup.open()
-        submitButtonSelector[1].classList.add('button_type_invalid')
+        handleAddPopup.submitButton.classList.add('button_type_invalid')
     });
 
 
