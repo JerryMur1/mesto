@@ -1,0 +1,13 @@
+.profile__groupe{
+    position: relative;
+}
+
+.profile__groupe:hover .profile__image{
+opacity: 1;
+}
+
+@media screen and (max-width:700px){
+    .profile__groupe {
+    margin: 0 auto;
+    }
+}
