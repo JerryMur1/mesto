@@ -40,6 +40,9 @@ function createCard({name, link, likes,_id, owner}) {
                 .then(()=>{
                     card.delete()
                 })   
+                .catch((err) => {
+                    console.log(err);
+                })
                 })
                 handleSubmitPopup.open();
                 handleSubmitPopup.setEventListeners()
@@ -53,6 +56,8 @@ function createCard({name, link, likes,_id, owner}) {
                 : api.likeCard(_id)
                 .then((res)=>{
                     card.handleLike(res)
+                }).catch((err) => {
+                    console.log(err);
                 })
             }
 
@@ -60,6 +65,7 @@ function createCard({name, link, likes,_id, owner}) {
     const cardElement = card.render();
     cardsList.addItem(cardElement);
     card.setLike()
+    
 }
 
 
