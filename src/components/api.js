@@ -14,12 +14,7 @@ export class Api {
         method: "GET",
         headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+    .then(this._ifResOk);
     } 
 
     addCards(data){
@@ -31,12 +26,7 @@ export class Api {
                 link:data.secondname,
             })
     })
-    .then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-        });
+    .then(this._ifResOk);
     }
 
     addUserId(data) {
@@ -48,12 +38,7 @@ export class Api {
             about:data.secondname,
         })
     })
-    .then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-        });
+    .then(this._ifResOk);
     }
 
     getUserId() {
@@ -61,12 +46,7 @@ export class Api {
             method: "GET",
             headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
+    .then(this._ifResOk);
     }
 
 
@@ -79,12 +59,7 @@ export class Api {
                 avatar:data.avatar,
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
+    .then(this._ifResOk);
     }
 
     getAllNeededData() {
@@ -97,12 +72,7 @@ export class Api {
             method: "DELETE",
             headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
+    .then(this._ifResOk);
         
     }
 
@@ -111,25 +81,23 @@ export class Api {
             method: "PUT",
             headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
+    .then(this._ifResOk);
     }
     deleteLike(_id){
         return fetch("https://mesto.nomoreparties.co/v1/cohort-18/cards/likes" + '/' +_id, {
             method: "DELETE",
             headers: this._headers
             })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
+    .then(this._ifResOk);
     }
+
+
+    _ifResOk(res){
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        };
 }
 
 

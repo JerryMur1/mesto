@@ -7,9 +7,6 @@ export class PopupWithSubmit extends Popup {
         this._popupForm = this._popupSelector.querySelector('.popup__content')
         this._handleSubmitCallback = handleSubmitCallback
     }
-// setSubmitAction(submitAction){
-// this._handleSubmitCallback = submitAction
-// }
     setEventListeners() {
         super.setEventListeners();
         this._popupForm.addEventListener('submit', (evt)=>{

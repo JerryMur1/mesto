@@ -31,5 +31,6 @@ export class PopupWithForm extends Popup {
     close() {
         super.close()
         this.form.reset();
+        this.submitButton.classList.add('button_type_invalid')
     }
 }
