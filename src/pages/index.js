@@ -82,6 +82,7 @@ function createCard({name, link, likes,_id, owner}) {
         errorClass: 'error'
     }, formElement);
     formValidation.enableValidation();
+    addButton.addEventListener('click', ()=>{formValidation.setButtonInvalid()})
     });
 
     const handleUserInfo = new UserInfo({
@@ -156,7 +157,6 @@ function createCard({name, link, likes,_id, owner}) {
         handleAvatarPopup.open()
         handleAvatarPopup.submitButton.textContent="Сохранить"
     })
-
 
 
     const api = new Api({

@@ -49,6 +49,10 @@ export class FormValidation {
         this._toggleButtonElement(this._formElement, this._buttonElement);
     };
 
+    setButtonInvalid(){
+        this._buttonElement.classList.add(this._settings.inactiveButtonClass)
+    }
+
     enableValidation() {
         this._formElement.addEventListener('submit', (evt)=> {
             evt.preventDefault();
