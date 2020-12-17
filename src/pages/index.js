@@ -29,13 +29,16 @@ import { PopupWithSubmit } from '../components/PopupWithSubmit';
 cardsList.render()
 
 
+const handleSubmitPopup = new PopupWithSubmit(
+    '.popup_delete')
+    
 
 function createCard({name, link, likes,_id, owner}) {
     const card = new Card({name, link, likes, _id, owner,
         handleCardClick:  () => clickCard({name, link}),  
         handleDeleteClick: () => {
-            const handleSubmitPopup = new PopupWithSubmit(
-                '.popup_delete', ()=>{
+            
+            handleSubmitPopup.setSubmitAction(()=> {
                 api.deleteCard(_id)
                 .then(()=>{
                     card.delete()
@@ -43,9 +46,8 @@ function createCard({name, link, likes,_id, owner}) {
                 .catch((err) => {
                     console.log(err);
                 })
-                })
-                handleSubmitPopup.open();
-                handleSubmitPopup.setEventListeners()
+            })
+            handleSubmitPopup.open();
             },
             handleLikeClick: ()=>{
                 card.isLike()
@@ -134,10 +136,13 @@ function createCard({name, link, likes,_id, owner}) {
             })
         }
     })
+    
 
 
 
 
+
+    handleSubmitPopup.setEventListeners()
     handleAddPopup.setEventListeners()
     handleProfilePopup.setEventListeners()
     handleAvatarPopup.setEventListeners()
