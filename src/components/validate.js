@@ -50,7 +50,14 @@ export class FormValidation {
     };
 
     setButtonInvalid(){
-        this._buttonElement.classList.add(this._settings.inactiveButtonClass)
+        if (this._formElement.checkValidity()) {
+            this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
+            this._buttonElement.disabled = false;
+        }
+        else {
+            this._buttonElement.classList.add(this._settings.inactiveButtonClass);
+            this._buttonElement.disabled = true;
+        }
     }
 
     enableValidation() {

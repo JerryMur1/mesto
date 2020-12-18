@@ -13,7 +13,6 @@ constructor({name, link, likes, _id, owner, handleCardClick, handleDeleteClick, 
     this._template = document.querySelector(cardSelector).content.querySelector('.element');
     this._getUser = getUser;
     this._deleteButton = this._template.querySelector('.button_type_delete')
-    
     }
     
     like() {
@@ -36,7 +35,7 @@ constructor({name, link, likes, _id, owner, handleCardClick, handleDeleteClick, 
             this._content.querySelector('.element__like_number').textContent = this._likes.length
         }
     }
-
+    
 
     setLike(){
 

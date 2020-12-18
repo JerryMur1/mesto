@@ -18,7 +18,6 @@ import { PopupWithSubmit } from '../components/PopupWithSubmit';
         popupImage.open(name, link)
     }
     const popupImage = new PopupWithImage('.popup_modal');
-    popupImage.setEventListeners();
 
     const cardsList = new Section({
         items: [],
@@ -67,7 +66,6 @@ function createCard({name, link, likes,_id, owner}) {
     const cardElement = card.render();
     cardsList.addItem(cardElement);
     card.setLike()
-    
 }
 
 
@@ -103,8 +101,8 @@ function createCard({name, link, likes,_id, owner}) {
             console.log(err);
         })
     }}) 
-
-
+    
+    
 
     const buttonList = document.querySelectorAll('.button_type_save')
     buttonList.forEach(item =>{
@@ -141,7 +139,7 @@ function createCard({name, link, likes,_id, owner}) {
 
 
 
-
+    popupImage.setEventListeners();
     handleSubmitPopup.setEventListeners()
     handleAddPopup.setEventListeners()
     handleProfilePopup.setEventListeners()
@@ -156,7 +154,7 @@ function createCard({name, link, likes,_id, owner}) {
     });
     addButton.addEventListener("click", () => {
         handleAddPopup.open()
-        handleAddPopup.submitButton.innerText="Создать"
+        handleAddPopup.submitButton.textContent="Создать"
     });
     avatarButton.addEventListener("click", () =>{
         handleAvatarPopup.open()
