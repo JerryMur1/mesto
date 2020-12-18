@@ -46,7 +46,7 @@ function createCard({name, link, likes,_id, owner}) {
                     console.log(err);
                 })
             })
-            handleSubmitPopup.open();
+            handleSubmitPopup.open(); 
             },
             handleLikeClick: ()=>{
                 card.isLike()
