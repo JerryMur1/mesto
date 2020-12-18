@@ -83,6 +83,7 @@ function createCard({name, link, likes,_id, owner}) {
     }, formElement);
     formValidation.enableValidation();
     addButton.addEventListener('click', ()=>{formValidation.setButtonInvalid()})
+    avatarButton.addEventListener('click', ()=>{formValidation.setButtonInvalid()})
     });
 
     const handleUserInfo = new UserInfo({
