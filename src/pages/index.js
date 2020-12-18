@@ -82,8 +82,8 @@ function createCard({name, link, likes,_id, owner}) {
         errorClass: 'error'
     }, formElement);
     formValidation.enableValidation();
-    addButton.addEventListener('click', ()=>{formValidation.setButtonInvalid()})
-    avatarButton.addEventListener('click', ()=>{formValidation.setButtonInvalid()})
+    addButton.addEventListener('click', ()=>{formValidation.toggleButtonElement()})
+    avatarButton.addEventListener('click', ()=>{formValidation.toggleButtonElement()})
     });
 
     const handleUserInfo = new UserInfo({
@@ -174,35 +174,23 @@ function createCard({name, link, likes,_id, owner}) {
     }); 
 
     let getUser;
-    api.getUserId().then((res)=>{
-        getUser = res;
-    })
-
 
     api.getAllNeededData().then(arg =>{
-        const [getCard, getUser] = arg
+        const [getCard, userData] = arg
             const cardsList = new Section({
                 items: getCard,
                 renderer: ({name, link, likes, _id, owner}) => createCard({name, link, likes, _id, owner}, "#template", getUser)
                 },      
                 cardsElement
-            );
+                
+            );  
+            getUser = userData;
+            handleUserInfo.setUserInfo(userData.name, userData.about) 
+            handleUserInfo.setUserPic(userData.avatar),
             cardsList.render()
-            console.log(getCard)
             })
             .catch((err) => {
             console.log(err);
             }); 
 
-
-
-        api.getUserId()
-        .then((data) =>{
-                    handleUserInfo.setUserInfo(data.name, data.about) 
-                    console.log(data)
-                    handleUserInfo.setUserPic(data.avatar)
-                })
-        .catch((err) => {
-            console.log(err); 
-        }); 
 

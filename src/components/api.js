@@ -14,7 +14,7 @@ export class Api {
         method: "GET",
         headers: this._headers
         })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     } 
 
     addCards(data){
@@ -26,7 +26,7 @@ export class Api {
                 link:data.secondname,
             })
     })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
 
     addUserId(data) {
@@ -38,7 +38,7 @@ export class Api {
             about:data.secondname,
         })
     })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
 
     getUserId() {
@@ -46,7 +46,7 @@ export class Api {
             method: "GET",
             headers: this._headers
             })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
 
 
@@ -59,7 +59,7 @@ export class Api {
                 avatar:data.avatar,
             })
         })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
 
     getAllNeededData() {
@@ -72,7 +72,7 @@ export class Api {
             method: "DELETE",
             headers: this._headers
             })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
         
     }
 
@@ -81,18 +81,18 @@ export class Api {
             method: "PUT",
             headers: this._headers
             })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
     deleteLike(_id){
         return fetch("https://mesto.nomoreparties.co/v1/cohort-18/cards/likes" + '/' +_id, {
             method: "DELETE",
             headers: this._headers
             })
-    .then(this._ifResOk);
+    .then(this._handleResOk);
     }
 
 
-    _ifResOk(res){
+    _handleResOk(res){
             if (res.ok) {
                 return res.json();
             }
